@@ -12,7 +12,6 @@ import MenuBuilder from './menu';
 // Prepare the renderer once the app is ready
 app.on('ready', async () => {
   await prepareNext('./renderer');
-
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,

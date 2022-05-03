@@ -4,20 +4,15 @@ import { Button, Title } from '@schoolmouv/react-kit';
 import { decrement, increment, incrementByAmount } from '@store/counter';
 import { useEffect, useState } from 'react';
 import { selectCount } from '@store/counter';
+import { useIpcRenderOn } from '@hooks/useIpcRenderOn';
 
 const CounterPage = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const [incrementAmount, setIncrementAmount] = useState<number>(0);
 
-  useEffect(() => {
-    global.ipcRenderer.on('electron-increment', () => {
-      dispatch(increment());
-    });
-    global.ipcRenderer.on('electron-decrement', () => {
-      dispatch(decrement());
-    });
-  }, [global.ipcRenderer]);
+  useIpcRenderOn('electron-increment', () => dispatch(increment()));
+  useIpcRenderOn('electron-decrement', () => dispatch(decrement()));
 
   return (
     <Layout title='Counter'>

@@ -311,12 +311,14 @@ export default class MenuBuilder {
         submenu: [
           {
             label: 'Increment',
+            accelerator: 'Ctrl+numadd',
             click: () => {
               this.mainWindow.webContents.send('electron-increment');
             },
           },
           {
             label: 'Decrement',
+            accelerator: 'Ctrl+numsub',
             click: () => {
               this.mainWindow.webContents.send('electron-decrement');
             },
