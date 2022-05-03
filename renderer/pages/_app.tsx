@@ -1,12 +1,14 @@
-import { AppProps } from "next/app";
+import { AppProps } from 'next/app';
 
-import store from "@store/index";
-import { Provider } from "react-redux";
+import { useStore, wrapper } from '@store/index';
+import { Provider } from 'react-redux';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const store = useStore(pageProps.initialReduxState);
+
   return (
     <Provider store={store}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Provider>
   );
 }
