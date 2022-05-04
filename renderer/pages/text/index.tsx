@@ -1,8 +1,8 @@
-import Layout from '@components/Layout';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { useState } from 'react';
-import { changeText } from '@store/text';
 import { Button, Title } from '@schoolmouv/react-kit';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import Layout from '../../components/Layout';
+import { changeText } from '../../store/text';
 
 const TextPage = () => {
   const dispatch = useAppDispatch();

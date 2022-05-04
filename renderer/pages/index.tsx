@@ -1,8 +1,9 @@
-import Layout from '@components/Layout';
-import { selectCount } from '@store/counter';
-import { useAppSelector } from '@store/hooks';
-import { useSendIpc } from '@hooks/useSendIpc';
 import { Button } from '@schoolmouv/react-kit';
+
+import Layout from '../components/Layout';
+import { useSendIpc } from '../hooks/useSendIpc';
+import { selectCount } from '../store/counter';
+import { useAppSelector } from '../store/hooks';
 
 const IndexPage = () => {
   const count = useAppSelector(selectCount);

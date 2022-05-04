@@ -1,14 +1,14 @@
-import Layout from '@components/Layout';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { useEffect, useState } from 'react';
 import { Button, Title } from '@schoolmouv/react-kit';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   decrement,
   increment,
   incrementByAmount,
   selectCount,
-} from '@store/counter';
-import { useState } from 'react';
-import { useIpcRenderOn } from '@hooks/useIpcRenderOn';
+} from '../../store/counter';
+import { useIpcRenderOn } from '../../hooks/useIpcRenderOn';
+import Layout from '../../components/Layout';
 
 const CounterPage = () => {
   const dispatch = useAppDispatch();
