@@ -1,11 +1,15 @@
 // Native
-import path, { join } from 'path';
+import { join } from 'path';
 import { format } from 'url';
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent, session } from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 import prepareNext from 'electron-next';
+import installExtension, {
+  REDUX_DEVTOOLS,
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 
 import MenuBuilder from './menu';
 
@@ -40,19 +44,12 @@ app.on('ready', async () => {
 });
 
 // Allows you to add chrome extensions https://www.electronjs.org/fr/docs/latest/tutorial/devtools-extension
+// https://github.com/MarshallOfSound/electron-devtools-installer
 if (isDev) {
-  // https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
-  const reduDevTool = path.join(
-    '/home/raphael/.config/google-chrome/Profile 1/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/3.0.11_0'
-  );
-  // https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
-  const reactDevTol = path.join(
-    '/home/raphael/.config/google-chrome/Profile 1/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.24.3_0'
-  );
-
-  app.whenReady().then(async () => {
-    await session.defaultSession.loadExtension(reduDevTool);
-    await session.defaultSession.loadExtension(reactDevTol);
+  app.whenReady().then(() => {
+    installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+      .then((name) => console.log(`Added Extension:  ${name}`))
+      .catch((err) => console.log('An error occurred: ', err));
   });
 }
 
