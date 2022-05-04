@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import textReducer from './text';
-import counterReducer from './counter';
+import textSlice from './text';
+import counterSlice from './counter';
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    text: textReducer,
+    [counterSlice.name]: counterSlice.reducer,
+    [textSlice.name]: textSlice.reducer,
   },
 });
 

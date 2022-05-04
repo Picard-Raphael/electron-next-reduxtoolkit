@@ -35,4 +35,4 @@ export const countSelector = createSelector(selectCount, (state) => state);
 // Actions
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-export default counterSlice.reducer;
+export default counterSlice;
