@@ -12,8 +12,7 @@ import Layout from '../../components/Layout';
 const CounterPage = () => {
   const { increment, decrement, incrementByAmount } = useActionsCounter();
   const count = useAppSelector(selectCount);
-  const state = useAppSelector((state) => state);
-  console.log(state);
+
   const [incrementAmount, setIncrementAmount] = useState<number>(0);
   useIpcRenderOn('electron-increment', () => increment());
   useIpcRenderOn('electron-decrement', () => decrement());
@@ -60,8 +59,8 @@ const CounterPage = () => {
 
 export default CounterPage;
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   return {
     props: {},
   };
-}
+};

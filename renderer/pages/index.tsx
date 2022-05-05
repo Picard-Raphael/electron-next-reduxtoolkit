@@ -25,8 +25,8 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   return {
     props: {},
   };
-}
+};

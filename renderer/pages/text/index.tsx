@@ -31,8 +31,8 @@ const TextPage = () => {
 
 export default TextPage;
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   return {
     props: {},
   };
-}
+};
