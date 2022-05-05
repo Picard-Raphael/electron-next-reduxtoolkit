@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button, Title } from '@schoolmouv/react-kit';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import Layout from '../../components/Layout';
-import { changeText } from '../../store/text';
+import { useActionsText } from '../../store/text';
 
 const TextPage = () => {
-  const dispatch = useAppDispatch();
   const text = useAppSelector((state) => state.text.text);
+  const { changeText } = useActionsText();
   const [newText, setNewText] = useState('');
   return (
     <Layout title='Counter'>
@@ -22,11 +22,7 @@ const TextPage = () => {
           onChange={(e) => setNewText(String(e.target.value))}
         />
       </div>
-      <Button
-        onClick={() => dispatch(changeText(newText))}
-        type='primary'
-        size='large'
-      >
+      <Button onClick={() => changeText(newText)} type='primary' size='large'>
         Validate
       </Button>
     </Layout>
@@ -34,3 +30,9 @@ const TextPage = () => {
 };
 
 export default TextPage;
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}

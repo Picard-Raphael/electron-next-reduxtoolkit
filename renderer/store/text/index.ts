@@ -1,8 +1,6 @@
+import { useActions } from './../hooks';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type TextState = {
-  text: string;
-};
+import { TextAction, TextState } from './text.type';
 
 const initialState: TextState = {
   text: 'Change text',
@@ -19,4 +17,6 @@ const textSlice = createSlice({
 });
 export const { changeText } = textSlice.actions;
 
+export const useActionsText = (): TextAction =>
+  useActions({ ...textSlice.actions });
 export default textSlice;

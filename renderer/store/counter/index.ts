@@ -1,9 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
-
-type CounterState = {
-  value: number;
-};
+import { useActions } from '../hooks';
+import { AppState } from './../index';
+import { CounterAction, CounterState } from './counter.type';
 
 const initialState: CounterState = {
   value: 0,
@@ -29,10 +27,14 @@ const counterSlice = createSlice({
 });
 
 // Selectors
-export const selectCount = (state: RootState) => state.counter.value;
-export const countSelector = createSelector(selectCount, (state) => state);
+export const selectCount = (state: AppState) => state.counter.value;
+
+// Memoized selector
+export const countSelector = createSelector(selectCount, (value) => value);
 
 // Actions
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+//export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const useActionsCounter = (): CounterAction =>
+  useActions({ ...counterSlice.actions });
 
 export default counterSlice;

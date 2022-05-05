@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Button, Title } from '@schoolmouv/react-kit';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import {
-  decrement,
-  increment,
-  incrementByAmount,
+  countSelector,
   selectCount,
+  useActionsCounter,
 } from '../../store/counter';
 import { useIpcRenderOn } from '../../hooks/useIpcRenderOn';
 import Layout from '../../components/Layout';
 
 const CounterPage = () => {
-  const dispatch = useAppDispatch();
+  const { increment, decrement, incrementByAmount } = useActionsCounter();
   const count = useAppSelector(selectCount);
+  const state = useAppSelector((state) => state);
+  console.log(state);
   const [incrementAmount, setIncrementAmount] = useState<number>(0);
-
-  useIpcRenderOn('electron-increment', () => dispatch(increment()));
-  useIpcRenderOn('electron-decrement', () => dispatch(decrement()));
+  useIpcRenderOn('electron-increment', () => increment());
+  useIpcRenderOn('electron-decrement', () => decrement());
 
   return (
     <Layout title='Counter'>
@@ -28,18 +28,14 @@ const CounterPage = () => {
       </Title>
       <div style={{ display: 'flex', marginBottom: '10px' }}>
         <Button
-          onClick={() => dispatch(decrement())}
+          onClick={() => decrement()}
           type='primary'
           size='small'
           style={{ marginRight: '10px' }}
         >
           Decrement
         </Button>
-        <Button
-          onClick={() => dispatch(increment())}
-          type='primary'
-          size='small'
-        >
+        <Button onClick={() => increment()} type='primary' size='small'>
           Increment
         </Button>
       </div>
@@ -51,7 +47,7 @@ const CounterPage = () => {
           style={{ marginBottom: '10px' }}
         />
         <Button
-          onClick={() => dispatch(incrementByAmount(Number(incrementAmount)))}
+          onClick={() => incrementByAmount(Number(incrementAmount))}
           type='primary'
           size='small'
         >
@@ -63,3 +59,9 @@ const CounterPage = () => {
 };
 
 export default CounterPage;
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
