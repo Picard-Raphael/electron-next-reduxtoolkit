@@ -1,7 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useActions } from '../hooks';
-import { AppState } from './../index';
 import { CounterAction, CounterState } from './counter.type';
+import { RootState } from '..';
 
 const initialState: CounterState = {
   value: 0,
@@ -27,7 +27,7 @@ const counterSlice = createSlice({
 });
 
 // Selectors
-export const selectCount = (state: AppState) => state.counter.value;
+export const selectCount = (state: RootState) => state.counter.value;
 
 // Memoized selector
 export const countSelector = createSelector(selectCount, (value) => value);
